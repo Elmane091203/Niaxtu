@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart'; // ignore_for_file: must_be_immutable
+import '../../core/app_export.dart';
+import '../../widgets/custom_elevated_button.dart';
+import '../../widgets/custom_text_form_field.dart'; // ignore_for_file: must_be_immutable
 
 // ignore_for_file: must_be_immutable
 class ConnexionScreen extends StatelessWidget {
@@ -12,137 +14,111 @@ class ConnexionScreen extends StatelessWidget {
 
   TextEditingController passwordoneController = TextEditingController();
 
+  GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Color(0XFFFFFCFC),
+        backgroundColor: appTheme.whiteA700,
         resizeToAvoidBottomInset: false,
-        body: Container(
-          width: 375,
-          padding: EdgeInsets.symmetric(horizontal: 30),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(
-                    73,
-                  ),
-                  child: Image.asset(
-                    "assets/images/img_ellipse_7.png",
-                    height: 147,
-                    width: 171,
-                  ),
-                ),
-                padding: EdgeInsets.all(10.0),
-              ),
-              SizedBox(height: 11),
-              Text(
-                "Bienvenue",
-                style: TextStyle(
-                  color: Color(0XFF180606),
-                  fontSize: 26,
-                  fontFamily: 'Book Antiqua',
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              SizedBox(height: 4),
-              Text(
-                "Connexion",
-                style: TextStyle(
-                  color: Color(0XFF807C7C),
-                  fontSize: 20,
-                  fontFamily: 'Book Antiqua',
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              SizedBox(height: 15),
-              _buildPhoneNumberSection(context),
-              SizedBox(height: 7),
-              _buildPasswordSection(context),
-              SizedBox(height: 8),
-              Align(
-                alignment: Alignment.centerRight,
-                child: Padding(
-                  padding: EdgeInsets.only(right: 6),
-                  child: Text(
-                    "Mot de passe oublié?",
-                    style: TextStyle(
-                      color: Color(0XFFEA4335),
-                      fontSize: 16,
-                      fontFamily: 'Book Antiqua',
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 25),
-              Container(
-                width: MediaQuery.of(context).size.width,
-                height: 48,
-                margin: EdgeInsets.symmetric(horizontal: 10),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0XFF29B6F6),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                        22,
-                      ),
-                    ),
-                    visualDensity: const VisualDensity(
-                      vertical: -4,
-                      horizontal: -4,
-                    ),
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 30,
-                      vertical: 8,
-                    ),
-                  ),
-                  onPressed: () {},
-                  child: Text(
-                    "Connexion",
-                    style: TextStyle(
-                      color: Color(0XFFFFFFFF),
-                      fontSize: 20,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 17),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 19),
-                child: Row(
+        body: Center(
+          child: SingleChildScrollView(
+            padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom),
+            child: Form(
+              key: _formkey,
+              child: Container(
+                width: double.maxFinite,
+                padding: EdgeInsets.symmetric(horizontal: 30.h),
+                child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      "Pas de compte ?",
-                      style: TextStyle(
-                        color: Color(0XFF606060),
-                        fontSize: 16,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w500,
-                      ),
+                    CustomImageView(
+                      imagePath: ImageConstant.imgLogo,
+                      height: 147.v,
+                      width: 171.h,
+                      radius: BorderRadius.circular(71.h),
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 6),
-                      child: Text(
-                        "Créer un compte",
-                        style: TextStyle(
-                          color: Color(0XFF9C9C9C),
-                          fontSize: 16,
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.w500,
+                    SizedBox(
+                      height: 10.v,
+                    ),
+                    Text(
+                      "Bienvenue",
+                      style: CustomTextStyles.titleLargeBookAntiquaGray60001,
+                    ),
+                    SizedBox(
+                      height: 15.v,
+                    ),
+                    _buildColumnnumeropse(context),
+                    SizedBox(
+                      height: 15.v,
+                    ),
+                    _buildColumnmotdepasse(context),
+                    SizedBox(
+                      height: 15.v,
+                    ),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: GestureDetector(
+                        onTap: () {
+                          onTapTxtMotdepasseone(context);
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.only(right: 6.h),
+                          child: Text(
+                            "Mot de passe oublié?",
+                            style: CustomTextStyles.bodyLargeRed500,
+                          ),
                         ),
                       ),
-                    )
+                    ),
+                    SizedBox(
+                      height: 15.v,
+                    ),
+                    CustomElevatedButton(
+                      text: "Connexion",
+                      margin: EdgeInsets.symmetric(horizontal: 10.h),
+                      onPressed: () {
+                        onTapBtnConnexion(context);
+                      },
+                    ),
+                    SizedBox(
+                      height: 15.v,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 19.h),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Pas de compte?",
+                            style: CustomTextStyles
+                                .titleMediumBookAntiquaOnPrimaryContainer,
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              onTapTxtCreercompte(context);
+                            },
+                            child: Padding(
+                              padding: EdgeInsets.only(left: 16.h),
+                              child: Text(
+                                "Créer un compte",
+                                style: CustomTextStyles
+                                    .titleMediumBookAntiquaGray50001,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 5.v,
+                    ),
                   ],
                 ),
               ),
-              SizedBox(height: 5)
-            ],
+            ),
           ),
         ),
       ),
@@ -150,7 +126,7 @@ class ConnexionScreen extends StatelessWidget {
   }
 
   /// Section Widget
-  Widget _buildPhoneNumberSection(BuildContext context) {
+  Widget _buildColumnnumeropse(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -166,67 +142,20 @@ class ConnexionScreen extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(height: 19),
-        SizedBox(
-          width: 315,
-          child: TextFormField(
-            focusNode: FocusNode(),
-            autofocus: true,
-            controller: pleaseenteryourController,
-            style: TextStyle(
-              color: Color(0XFF807C7C),
-              fontSize: 16,
-              fontFamily: 'Book Antiqua',
-              fontWeight: FontWeight.w400,
-            ),
-            decoration: InputDecoration(
-              hintText: "Veuillez saisir votre numero",
-              hintStyle: TextStyle(
-                color: Color(0XFF807C7C),
-                fontSize: 16,
-                fontFamily: 'Book Antiqua',
-                fontWeight: FontWeight.w400,
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(
-                  6,
-                ),
-                borderSide: BorderSide.none,
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(
-                  6,
-                ),
-                borderSide: BorderSide.none,
-              ),
-              disabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(
-                  6,
-                ),
-                borderSide: BorderSide.none,
-              ),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(
-                  6,
-                ),
-                borderSide: BorderSide.none,
-              ),
-              filled: true,
-              fillColor: Color(0XFFFFFCFC),
-              isDense: true,
-              contentPadding: EdgeInsets.symmetric(
-                horizontal: 30,
-                vertical: 14,
-              ),
-            ),
-          ),
-        )
+        SizedBox(height: 20.v),
+        CustomTextFormField(
+          // controller: _numeroPseudoController,
+          hintText: "Veuillez saisir votre numero",
+          borderDecoration: TextFormFieldStyleHelper.outlinePrimaryTL6,
+          fillColor: appTheme.whiteA700,
+          obscureText: false,
+        ),
       ],
     );
   }
 
   /// Section Widget
-  Widget _buildPasswordSection(BuildContext context) {
+  Widget _buildColumnmotdepasse(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -242,76 +171,53 @@ class ConnexionScreen extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(height: 7),
-        SizedBox(
-          width: 315,
-          child: TextFormField(
-            focusNode: FocusNode(),
-            autofocus: true,
-            controller: passwordoneController,
-            style: TextStyle(
-              color: Color(0XFF807C7C),
-              fontSize: 16,
-              fontFamily: 'Book Antiqua',
-              fontWeight: FontWeight.w400,
-            ),
-            textInputAction: TextInputAction.done,
-            obscureText: true,
-            decoration: InputDecoration(
-              hintText: "Mot de passe",
-              hintStyle: TextStyle(
-                color: Color(0XFF807C7C),
-                fontSize: 16,
-                fontFamily: 'Book Antiqua',
-                fontWeight: FontWeight.w400,
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(
-                  6,
-                ),
-                borderSide: BorderSide.none,
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(
-                  6,
-                ),
-                borderSide: BorderSide.none,
-              ),
-              disabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(
-                  6,
-                ),
-                borderSide: BorderSide.none,
-              ),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(
-                  6,
-                ),
-                borderSide: BorderSide.none,
-              ),
-              suffixIcon: Container(
-                margin: EdgeInsets.fromLTRB(30, 12, 14, 12),
-                child: SvgPicture.asset(
-                  "assets/images/img_group_8.svg",
-                  height: 24,
-                  width: 27,
-                ),
-              ),
-              suffixIconConstraints: BoxConstraints(
-                maxHeight: 48,
-              ),
-              filled: true,
-              fillColor: Color(0XFFFFFCFC),
-              isDense: true,
-              contentPadding: EdgeInsets.only(
-                left: 30,
-                top: 14,
-                bottom: 14,
-              ),
+        SizedBox(height: 7.v),
+        CustomTextFormField(
+          // controller: _motDePasseController,
+          hintText: "Mot de passe",
+          textInputAction: TextInputAction.done,
+          textInputType: TextInputType.visiblePassword,
+          suffix: Container(
+            margin: EdgeInsets.fromLTRB(30.h, 12.v, 14.h, 12.v),
+            child: CustomImageView(
+              imagePath: ImageConstant.imgGroup8Gray60001,
+              height: 24.h,
+              width: 27.h,
             ),
           ),
+          suffixConstraints: BoxConstraints(
+            maxHeight: 48.v,
+          ),
+          obscureText: true,
+          contentPadding: EdgeInsets.only(
+            left: 30.h,
+            top: 14.v,
+            bottom: 14.v,
+          ),
+          borderDecoration: TextFormFieldStyleHelper.outlinePrimaryTL6,
+          fillColor: appTheme.whiteA700,
         )
       ],
     );
+  }
+
+  onTapTxtMotdepasseone(BuildContext context) {
+    Navigator.pushNamed(context, AppRoutes.forgotPasswordScreen);
+  }
+
+  onTapBtnConnexion(BuildContext context) {
+    Navigator.pushNamed(context, AppRoutes.accueilScreen);
+  }
+
+  onTapTxtCreercompte(BuildContext context) {
+    Navigator.pushNamed(context, AppRoutes.inscriptionScreen);
+  }
+
+  TextEditingController _numeroPseudoController() {
+    return TextEditingController();
+  }
+
+  _motDePasseController() {
+    return TextEditingController();
   }
 }
